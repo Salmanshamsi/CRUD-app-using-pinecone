@@ -121,7 +121,7 @@ useEffect(()=>{
 
     {/* navigation Menu */}
     
-      <Navbar query={searchHandler} />
+      <Navbar query={searchHandler} getdata={getData}  />
 
     {/* Create Post Button */}
 

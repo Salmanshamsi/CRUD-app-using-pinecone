@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Navbar = ({query}) => {
+const Navbar = ({query,getdata}) => {
 
   const [searchValue,setSearchValue] = useState("");
 
@@ -18,7 +18,8 @@ const Navbar = ({query}) => {
             <input onChange={(e)=>{
               e.preventDefault();
               setSearchValue(e.target.value);
-            }} type="text" className='rounded-md w-44 text-black pl-3 md:w-64 h-10 me-4'  placeholder='  Search item'/>
+            }}
+            type="text" className='rounded-md w-44 text-black pl-3 md:w-64 h-10 me-4'  placeholder='  Search item'/>
             <button type='submit' className='p-2 rounded-md  bg-blue-500'  >Search</button>
         </form>
       </div>
