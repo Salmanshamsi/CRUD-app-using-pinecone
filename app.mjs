@@ -10,10 +10,10 @@ import path from "path";
 // starters
 
 
-const openAI_API = "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";
-const PINECONE_API = "f5178f19-1942-4a91-b053-5d5936855699";
-const PINECONE_ENV = "gcp-starter";
-const PINECONE_INDEX = "helloworld";
+const openAI_API = "";
+const PINECONE_API = "";
+const PINECONE_ENV = "";
+const PINECONE_INDEX = "";
 
 const app = express();
 const port = process.env.PORT || 3000;
