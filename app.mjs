@@ -1,22 +1,31 @@
 import express from "express"
+const app = express();
+
 import bodyParser from "body-parser";
 import cors from "cors";
 import stories from "./routes/story.mjs";
 import OpenAI from "openai";
 import { PineconeClient } from "@pinecone-database/pinecone";
 import path from "path";
+import "./config/index.mjs";
 
 
-// starters
+// OPEN-AI INITIALIZATION
 
+const openai = new OpenAI({
+    apiKey: process.env.OPEN_AI_API
+});
 
-const openAI_API = "";
-const PINECONE_API = "";
-const PINECONE_ENV = "";
-const PINECONE_INDEX = "";
+// PINECONE DATABASE INITIALIZATION    
 
-const app = express();
-const port = process.env.PORT || 3000;
+const pinecone = new PineconeClient();      
+
+await pinecone.init({      
+    environment: 'gcp-starter',      
+    apiKey: 'f5178f19-1942-4a91-b053-5d5936855699',      
+});          
+
+const index = pinecone.Index('helloworld');
 
 // Middlewares
 
@@ -25,28 +34,13 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(process.cwd() + '/public')));
 
-// OPEN-AI INITIALIZATION
-
-const openai = new OpenAI({
-    apiKey: openAI_API
-});
-
-// PINECONE DATABASE INITIALIZATION    
-
-    const pinecone = new PineconeClient();      
-
-    await pinecone.init({      
-        environment: PINECONE_ENV,      
-        apiKey: PINECONE_API,      
-    });          
-
-    const index = pinecone.Index(PINECONE_INDEX);
-
 // REST APIs 
 
 app.use("/stories" ,stories);
 
 // server listning...
+
+const port = process.env.PORT || 3000;
 
 app.listen(port,()=>{
     console.log("server started");

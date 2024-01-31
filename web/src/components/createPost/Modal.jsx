@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 
-
 const Modal = ({ isOpen ,isClose, onPost, onPut, id,cardId , main, setMain}) => {
 
   const [title,setTitle] = useState(null);

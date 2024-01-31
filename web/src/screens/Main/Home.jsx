@@ -64,6 +64,7 @@ const Home = () => {
         setloading("visible");
         const response = await axios.delete(`http://localhost:3000/stories/${id}`);
         console.log(response?.data);
+        getData();
         setloading("hidden")
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -81,6 +82,7 @@ const Home = () => {
         const resp = await axios.post(`http://localhost:3000/stories/`,data); 
         resp ? console.log("Data added Sucessfully")
         : console.log("Data not added Try Later");
+        getData();
         setloading("hidden");
     }catch(e){
             console.log("Error on updating Request :", e);
@@ -98,7 +100,8 @@ const Home = () => {
         const data = {title,content};
         const resp = await axios.put(`http://localhost:3000/stories/${id}`,data); 
         resp ? console.log("Data updated Sucessfully") 
-        : console.log("Data not update Try Later")
+        : console.log("Data not update Try Later");
+        getData();
 
     }catch(e){
             console.log("Error on updating Request :", e);
@@ -136,7 +139,7 @@ useEffect(()=>{
           data?data.map((CurEl,index)=>{
               return(
                 <div key={index} className='mt-5' >
-                  <Card  title={CurEl?.metadata?.title} indx={index} content={CurEl?.metadata?.content} id={CurEl?.id} setcardId={setCardId}  onDelete={deleteData}  onModal={setisOpen} />
+                  <Card  title={CurEl?.title} indx={index} content={CurEl?.content} id={CurEl?._id} setcardId={setCardId}  onDelete={deleteData}  onModal={setisOpen} />
                 </div>
               )
           }):"no Data Found"
